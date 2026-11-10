@@ -5,6 +5,11 @@ topology:
     site-a-fw:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-a/start.sh:/start.sh:ro
+        - /home/codespace/.config/pa2/site-a/privatekey:/run/wireguard/privatekey:ro
+      exec:
+        - sh /start.sh
 
     zone-a-host:
       kind: linux
@@ -21,10 +26,19 @@ topology:
     site-b-fw:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-b/start.sh:/start.sh:ro
+        - /home/codespace/.config/pa2/site-b/privatekey:/run/wireguard/privatekey:ro
+      exec:
+        - sh /start.sh
 
     site-b-collector:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-b/collector/start.sh:/start.sh:ro
+      exec:
+        - sh /start.sh
 
   links:
     # Site A security zones
