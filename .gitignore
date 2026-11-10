@@ -1,0 +1,19 @@
+# WireGuard private keys
+**/privatekey
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime logs
+site2site/logs/*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
