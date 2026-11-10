@@ -17,3 +17,4 @@ site2site/logs/*.log
 # Operating system files
 .DS_Store
 Thumbs.db
+site2site/clab-*/

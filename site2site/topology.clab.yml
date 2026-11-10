@@ -1,0 +1,39 @@
+name: pa2
+
+topology:
+  nodes:
+    site-a-fw:
+      kind: linux
+      image: alpine:latest
+
+    zone-a-host:
+      kind: linux
+      image: alpine:latest
+
+    zone-b-host:
+      kind: linux
+      image: alpine:latest
+
+    zone-c-host:
+      kind: linux
+      image: alpine:latest
+
+    site-b-fw:
+      kind: linux
+      image: alpine:latest
+
+    site-b-collector:
+      kind: linux
+      image: alpine:latest
+
+  links:
+    # Site A security zones
+    - endpoints: ["site-a-fw:eth1", "zone-a-host:eth1"]
+    - endpoints: ["site-a-fw:eth2", "zone-b-host:eth1"]
+    - endpoints: ["site-a-fw:eth3", "zone-c-host:eth1"]
+
+    # Simulated private underlay between sites
+    - endpoints: ["site-a-fw:eth4", "site-b-fw:eth1"]
+
+    # Site B collector network
+    - endpoints: ["site-b-fw:eth2", "site-b-collector:eth1"]
