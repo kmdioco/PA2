@@ -4,7 +4,7 @@ set -e
 echo "Configuring Site A firewall..."
 
 # Install networking tools
-apk add --no-cache iproute2 wireguard-tools
+apk add --no-cache iproute2 wireguard-tools nftables
 
 # Configure Site A security zones
 ip addr replace 192.0.2.1/26 dev eth1
@@ -38,5 +38,8 @@ wg set wg0 \
 
 # Route Site B collector traffic through WireGuard
 ip route replace 198.51.100.10/32 dev wg0
+
+# Load persistent firewall policy
+nft -f /etc/nftables.conf
 
 echo "Site A firewall configuration complete."

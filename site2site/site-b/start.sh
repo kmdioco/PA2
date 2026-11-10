@@ -5,7 +5,7 @@ echo "Configuring Site B firewall..."
 
 # Install networking tools
 sysctl -w net.ipv4.ip_forward=1
-apk add --no-cache iproute2 wireguard-tools
+apk add --no-cache iproute2 wireguard-tools nftables
 
 # Configure private underlay
 ip addr replace 203.0.113.2/29 dev eth1

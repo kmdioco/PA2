@@ -7,6 +7,7 @@ topology:
       image: alpine:latest
       binds:
         - site-a/start.sh:/start.sh:ro
+        - site-a/nftables.conf:/etc/nftables.conf:ro
         - /home/codespace/.config/pa2/site-a/privatekey:/run/wireguard/privatekey:ro
       exec:
         - sh /start.sh
