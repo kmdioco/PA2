@@ -8,6 +8,8 @@ topology:
       binds:
         - site-a/start.sh:/start.sh:ro
         - site-a/nftables.conf:/etc/nftables.conf:ro
+        - site-a/ulogd.conf:/etc/ulogd-pa2.conf:ro
+        - site-a/rsyslog.d:/etc/rsyslog.d:ro
         - /home/codespace/.config/pa2/site-a/privatekey:/run/wireguard/privatekey:ro
       exec:
         - sh /start.sh
@@ -15,20 +17,33 @@ topology:
     zone-a-host:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-a/zones/zone-a-start.sh:/start.sh:ro
+      exec:
+        - sh /start.sh
 
     zone-b-host:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-a/zones/zone-b-start.sh:/start.sh:ro
+      exec:
+        - sh /start.sh
 
     zone-c-host:
       kind: linux
       image: alpine:latest
+      binds:
+        - site-a/zones/zone-c-start.sh:/start.sh:ro
+      exec:
+        - sh /start.sh
 
     site-b-fw:
       kind: linux
       image: alpine:latest
       binds:
         - site-b/start.sh:/start.sh:ro
+        - site-b/nftables.conf:/etc/nftables.conf:ro
         - /home/codespace/.config/pa2/site-b/privatekey:/run/wireguard/privatekey:ro
       exec:
         - sh /start.sh
@@ -38,6 +53,7 @@ topology:
       image: alpine:latest
       binds:
         - site-b/collector/start.sh:/start.sh:ro
+        - site-b/collector/rsyslog.d:/etc/rsyslog.d:ro
       exec:
         - sh /start.sh
 

@@ -33,4 +33,8 @@ wg set wg0 \
     allowed-ips 10.255.0.1/32 \
     persistent-keepalive 25
 
+# Load persistent Site B firewall policy
+nft -c -f /etc/nftables.conf
+nft -f /etc/nftables.conf
+
 echo "Site B firewall configuration complete."
