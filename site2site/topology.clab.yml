@@ -54,6 +54,7 @@ topology:
       binds:
         - site-b/collector/start.sh:/start.sh:ro
         - site-b/collector/rsyslog.d:/etc/rsyslog.d:ro
+        - site-b/collector/logs:/var/log/collected
       exec:
         - sh /start.sh
 

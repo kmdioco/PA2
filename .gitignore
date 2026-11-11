@@ -7,7 +7,7 @@
 !.env.example
 
 # Runtime logs
-site2site/logs/*.log
+site2site/site-b/collector/logs/*.log
 
 # Temporary files
 *.tmp
